@@ -229,8 +229,8 @@ SECTION 13: FINAL AFFIRMATION
 
 SIGNED (WITH FEELINGS, NOT LAWYERS):
 
-Boyfriend: Narciso
-Girlfriend: Nada
+Boyfriend: Narciso  
+Girlfriend: Nada  
 
 Effective Date: February 14, 2026
     </div>
@@ -240,11 +240,11 @@ Effective Date: February 14, 2026
       <button class="decline" onclick="openDecline()">Decline ❌</button>
     </div>
 
-    <div class="note">Auto-scroll pauses if you interact with the text. 💖</div>
+    <div class="note">Auto-scroll pauses if you interact with the text 💖</div>
   </div>
 </div>
 
-<div class="modalOverlay" id="modal" role="dialog" aria-modal="true">
+<div class="modalOverlay" id="modal">
   <div class="modal">
     <h3>Decline detected 😭</h3>
     <p>Please choose one of the following totally serious options:</p>
@@ -257,72 +257,51 @@ Effective Date: February 14, 2026
 </div>
 
 <script>
-/* Accept/Decline */
+/* Accept / Decline */
 const modal = document.getElementById("modal");
 function openDecline(){ modal.style.display="flex"; }
 function closeDecline(){ modal.style.display="none"; }
-function accept(){ window.location.href="success.html"; }
-function pay(){ alert("Payment portal is down because Narciso is broke. Try earphones? 😭🎧"); }
+function accept(){ window.location.href="./success.html"; }
+function pay(){ alert("Payment portal is down because Narciso is broke 😭"); }
 function earphones(){
-  alert("Approved ✅ Narciso will now proceed with earphones acquisition. 💖🎧");
-  window.location.href="success.html";
+  alert("Approved ✅ Earphones it is 🎧💖");
+  window.location.href="./success.html";
 }
-modal.addEventListener("click",(e)=>{ if(e.target===modal) closeDecline(); });
 
-/* Terms auto-scroll (pauses on interaction) */
+/* Auto-scroll */
 const box = document.getElementById("termsBox");
 let scrolling = true;
-let autoTimer = null;
-
-function startAutoScroll(){
-  if(autoTimer) return;
-  autoTimer = setInterval(() => {
-    if(!scrolling) return;
-
-    const atBottom = box.scrollTop + box.clientHeight >= box.scrollHeight - 2;
-    if(atBottom){
-      box.scrollTop = 0; // loop back to top
-    } else {
-      box.scrollTop += 1; // speed (1px per tick)
-    }
-  }, 20);
-}
-
-function pauseAutoScrollTemporarily(ms=2000){
-  scrolling = false;
-  setTimeout(()=>{ scrolling = true; }, ms);
-}
-
-["wheel","touchstart","touchmove","mousedown","keydown"].forEach(evt=>{
-  box.addEventListener(evt, ()=>pauseAutoScrollTemporarily(2500), {passive:true});
+setInterval(()=>{
+  if(!scrolling) return;
+  if(box.scrollTop + box.clientHeight >= box.scrollHeight-2){
+    box.scrollTop = 0;
+  } else {
+    box.scrollTop += 1;
+  }
+},20);
+["wheel","touchstart","mousedown","keydown"].forEach(e=>{
+  box.addEventListener(e,()=>{scrolling=false;setTimeout(()=>scrolling=true,2500)},{passive:true});
 });
-box.addEventListener("mouseenter", ()=>pauseAutoScrollTemporarily(3000));
-box.addEventListener("scroll", ()=>pauseAutoScrollTemporarily(2000), {passive:true});
-
-setTimeout(startAutoScroll, 700);
 
 /* Hearts */
 const heartsRoot = document.getElementById("hearts");
 function spawnHeart(){
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.textContent = "❤";
-  const size = 14 + Math.random()*22;
-  const dur = 5 + Math.random()*6;
-  const x1 = Math.random()*100;
-  const x2 = Math.min(100, Math.max(0, x1 + (Math.random()*30 - 15)));
-  const scale = 0.7 + Math.random()*1.2;
-
-  h.style.fontSize = size + "px";
-  h.style.animationDuration = dur + "s";
-  h.style.setProperty("--xStart", x1 + "vw");
-  h.style.setProperty("--xEnd", x2 + "vw");
-  h.style.setProperty("--s", scale);
-
+  const h=document.createElement("div");
+  h.className="heart";h.textContent="❤";
+  const size=14+Math.random()*22;
+  const dur=5+Math.random()*6;
+  const x1=Math.random()*100;
+  const x2=Math.min(100,Math.max(0,x1+(Math.random()*30-15)));
+  const s=0.7+Math.random()*1.2;
+  h.style.fontSize=size+"px";
+  h.style.animationDuration=dur+"s";
+  h.style.setProperty("--xStart",x1+"vw");
+  h.style.setProperty("--xEnd",x2+"vw");
+  h.style.setProperty("--s",s);
   heartsRoot.appendChild(h);
-  setTimeout(()=>h.remove(), dur*1000);
+  setTimeout(()=>h.remove(),dur*1000);
 }
-setInterval(spawnHeart, 220);
+setInterval(spawnHeart,220);
 </script>
 </body>
 </html>
