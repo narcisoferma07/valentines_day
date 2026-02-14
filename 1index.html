@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>One Question 💖</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;height:100vh;display:flex;justify-content:center;align-items:center;
+  font-family:Arial,sans-serif;background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+  overflow:hidden;
+}
+.container{ text-align:center; max-width:90%; position:relative; z-index:2; }
+h1{ color:#fff; font-size:2.3rem; margin:0 0 40px; line-height:1.3; text-shadow:0 2px 6px rgba(0,0,0,0.25); }
+button{
+  padding:15px 40px;font-size:1.3rem;border:none;border-radius:30px;cursor:pointer;
+  background:#4CAF50;color:#fff;transition:transform .2s ease;
+}
+button:hover{transform:scale(1.05)}
+
+/* Hearts */
+#hearts{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.heart{
+  position:absolute;left:0;top:0;opacity:.9;
+  transform:translate(-50%,-50%);
+  animation:floatUp linear forwards;
+  filter:drop-shadow(0 6px 10px rgba(0,0,0,0.15));
+}
+@keyframes floatUp{
+  from{ transform:translate(var(--xStart), 110vh) scale(var(--s)); opacity:0;}
+  10%{opacity:0.95}
+  to{ transform:translate(var(--xEnd), -12vh) scale(var(--s)); opacity:0;}
+}
+</style>
+</head>
+
+<body>
+<div id="hearts"></div>
+
+<div class="container">
+  <h1>
+    If you didn't know, today is Valentine's Day ❤️<br>
+    and I have a question for you.
+  </h1>
+  <button onclick="next()">Continue</butto
