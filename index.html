@@ -44,4 +44,34 @@ button:hover{transform:scale(1.05)}
     If you didn't know, today is Valentine's Day ❤️<br>
     and I have a question for you.
   </h1>
-  <button onclick="next()">Continue</butto
+  <button onclick="next()">Continue</button>
+</div>
+
+<script>
+function next(){ window.location.href = "song.html"; }
+
+/* Hearts generator (reused on every page) */
+const heartsRoot = document.getElementById("hearts");
+function spawnHeart(){
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.textContent = "❤";
+  const size = 14 + Math.random()*22;
+  const dur = 5 + Math.random()*6;
+  const x1 = Math.random()*100;
+  const x2 = Math.min(100, Math.max(0, x1 + (Math.random()*30 - 15)));
+  const scale = 0.7 + Math.random()*1.2;
+
+  h.style.fontSize = size + "px";
+  h.style.animationDuration = dur + "s";
+  h.style.setProperty("--xStart", x1 + "vw");
+  h.style.setProperty("--xEnd", x2 + "vw");
+  h.style.setProperty("--s", scale);
+
+  heartsRoot.appendChild(h);
+  setTimeout(()=>h.remove(), dur*1000);
+}
+setInterval(spawnHeart, 220);
+</script>
+</body>
+</html>
